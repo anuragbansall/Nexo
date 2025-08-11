@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema({
   fullName: {
@@ -29,6 +30,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: [6, "Password must be at least 6 characters long"],
+    select: false,
   },
   socketId: {
     type: String,
@@ -37,6 +39,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
+
   try {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
@@ -45,6 +48,26 @@ userSchema.pre("save", async function (next) {
     next(err);
   }
 });
+
+userSchema.methods.generateAuthToken = function () {
+  const jwtSecret = process.env.JWT_SECRET;
+
+  if (!jwtSecret || jwtSecret.length < 16) {
+    throw new Error(
+      "JWT_SECRET is missing or too short. Please set a secure JWT_SECRET in your environment variables."
+    );
+  }
+
+  const token = jwt.sign({ _id: this._id }, jwtSecret, {
+    expiresIn: "7d",
+  });
+
+  return token;
+};
+
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
 
 const User = mongoose.model("User", userSchema);
 
