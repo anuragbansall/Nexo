@@ -1,9 +1,11 @@
 # Nexo Backend API Documentation
 
 ## Base URL
+
 ```
 http://localhost:PORT/
 ```
+
 Replace `PORT` with your server's port number.
 
 ---
@@ -11,9 +13,11 @@ Replace `PORT` with your server's port number.
 ## Endpoints
 
 ### 1. Register User
+
 `POST /api/users/register`
 
 #### Request Body
+
 ```
 {
   "fullName": {
@@ -26,7 +30,9 @@ Replace `PORT` with your server's port number.
 ```
 
 #### Response
+
 - **201 Created**
+
 ```
 {
   "user": {
@@ -49,7 +55,9 @@ Replace `PORT` with your server's port number.
   "token": "JWT token"
 }
 ```
+
 - **400 Bad Request** (validation or creation error)
+
 ```
 {
   "errors": [ ... ]
@@ -59,9 +67,11 @@ Replace `PORT` with your server's port number.
 ---
 
 ### 2. Login User
+
 `POST /api/users/login`
 
 #### Request Body
+
 ```
 {
   "email": "string",     // required, must be valid email
@@ -70,20 +80,26 @@ Replace `PORT` with your server's port number.
 ```
 
 #### Response
+
 - **200 OK**
+
 ```
 {
   "user": { ...user fields... },
   "token": "JWT token"
 - **400 Bad Request** (validation error)
 ```
+
 - **401 Unauthorized**
+
 ```
 {
   "error": "Invalid email or password."
 }
 ```
+
 - **400 Bad Request** (validation error)
+
 ```
 {
   "errors": [ ... ]
@@ -93,6 +109,7 @@ Replace `PORT` with your server's port number.
 ---
 
 ## Validation
+
 - All fields are required as described above.
 - Email must be valid format.
 - Password must be at least 6 characters.
@@ -100,13 +117,16 @@ Replace `PORT` with your server's port number.
 ---
 
 ## Authentication
+
 - JWT token is returned on successful registration and login.
 - Use this token for authenticated requests (future endpoints).
 
 ---
 
 ## Error Format
+
 - Validation errors:
+
 ```
 {
   "errors": [
@@ -114,7 +134,9 @@ Replace `PORT` with your server's port number.
   ]
 }
 ```
+
 - Other errors:
+
 ```
 {
   "error": "Error message"
@@ -124,5 +146,6 @@ Replace `PORT` with your server's port number.
 ---
 
 ## Notes
+
 - All endpoints accept and return JSON.
 - Add more endpoints as your API grows.
