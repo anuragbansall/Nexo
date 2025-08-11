@@ -81,7 +81,84 @@ Replace `PORT` with your server's port number.
 
 #### Response
 
+### 3. Get User Profile
+
+`GET /api/users/profile`
+
+#### Headers
+
+- `Authorization: Bearer <JWT token>` (or cookie `token`)
+
+#### Response
+
 - **200 OK**
+
+```
+{
+  "user": {
+    "id": "string",
+    "fullName": {
+      "first": "string",
+      "last": "string"
+    },
+    "email": "string",
+    "createdAt": "ISO8601 timestamp"
+    // other user fields as applicable
+  }
+}
+```
+
+- **404 Not Found**
+
+```
+{
+  "error": "User not found."
+}
+```
+
+- **400 Bad Request**
+
+```
+{
+  "error": "Error message"
+}
+```
+
+---
+
+### 4. Logout User
+
+`POST /api/users/logout`
+
+#### Headers
+
+- `Authorization: Bearer <JWT token>` (or cookie `token`)
+
+#### Response
+
+- **200 OK**
+
+```
+{
+  "message": "Logged out successfully."
+}
+```
+
+- **401 Unauthorized**
+
+```
+{
+  "error": "Unauthorized access."
+}
+```
+
+- **400 Bad Request**
+
+```
+{
+  "error": "Error message"
+}
+```
 
 ```
 {
