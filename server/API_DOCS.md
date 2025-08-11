@@ -29,7 +29,23 @@ Replace `PORT` with your server's port number.
 - **201 Created**
 ```
 {
-  "user": { ...user fields... },
+  "user": {
+    "id": "string",
+    "fullName": {
+      "first": "string",
+      "last": "string"
+    },
+    "email": "string",
+    "createdAt": "ISO8601 timestamp"
+  },
+  "token": "JWT token"
+}
+    "fullName": {
+- **400 Bad Request** (validation or creation error)
+      "last": "string"
+    }
+    // other user fields as applicable
+  },
   "token": "JWT token"
 }
 ```
@@ -59,7 +75,7 @@ Replace `PORT` with your server's port number.
 {
   "user": { ...user fields... },
   "token": "JWT token"
-}
+- **400 Bad Request** (validation error)
 ```
 - **401 Unauthorized**
 ```
