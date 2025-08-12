@@ -17,10 +17,11 @@ export const registerUser = async (req, res) => {
 
     const token = user.generateAuthToken();
 
-    res.cookie("token", token, { 
-      httpOnly: true, 
-      secure: process.env.NODE_ENV === 'production', 
-      sameSite: 'strict' 
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
     res.status(201).json({ user, token });

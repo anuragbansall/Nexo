@@ -70,9 +70,11 @@ const captainSchema = new mongoose.Schema({
   location: {
     latitude: {
       type: Number,
+      default: null,
     },
     longitude: {
       type: Number,
+      default: null,
     },
   },
 });
