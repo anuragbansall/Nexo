@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth.js";
 
 // Determine fields from server models:
 // User: firstName, lastName, email, password
@@ -45,28 +46,46 @@ const Register = () => {
     }
   }
 
-  function handleSubmit(e) {
+  const { register: registerAuth } = useAuth();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (role === "user") {
-      console.log("[REGISTER SUBMIT]", {
-        role,
-        fullName: { first: userForm.first, last: userForm.last },
-        email: userForm.email,
-        password: userForm.password,
-      });
-    } else {
-      console.log("[REGISTER SUBMIT]", {
-        role,
-        fullName: { first: captainForm.first, last: captainForm.last },
-        email: captainForm.email,
-        password: captainForm.password,
-        vehicle: {
-          ...captainForm.vehicle,
-          capacity: captainForm.vehicle.capacity
-            ? Number(captainForm.vehicle.capacity)
-            : undefined,
-        },
-      });
+    setLoading(true);
+    setError("");
+    try {
+      if (role === "user") {
+        const payload = {
+          role,
+          fullName: { first: userForm.first, last: userForm.last },
+          email: userForm.email,
+          password: userForm.password,
+        };
+        console.log("[REGISTER SUBMIT]", payload);
+        await registerAuth(payload);
+      } else {
+        const payload = {
+          role,
+          fullName: { first: captainForm.first, last: captainForm.last },
+          email: captainForm.email,
+          password: captainForm.password,
+          vehicle: {
+            ...captainForm.vehicle,
+            capacity: captainForm.vehicle.capacity
+              ? Number(captainForm.vehicle.capacity)
+              : undefined,
+          },
+        };
+        console.log("[REGISTER SUBMIT]", payload);
+        await registerAuth(payload);
+      }
+      navigate("/profile");
+    } catch (err) {
+      setError(err?.data?.error || err.message || "Registration failed");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -245,11 +264,19 @@ const Register = () => {
           </div>
         )}
 
+        {error && (
+          <div className="text-xs text-rose-400 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
+            {error}
+          </div>
+        )}
         <button
           type="submit"
-          className="w-full h-12 rounded-xl font-semibold text-sm tracking-wide bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all"
+          disabled={loading}
+          className="w-full h-12 rounded-xl font-semibold text-sm tracking-wide bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Create {role === "user" ? "User" : "Captain"} Account
+          {loading
+            ? "Creating..."
+            : `Create ${role === "user" ? "User" : "Captain"} Account`}
         </button>
         <p className="text-[11px] text-white/40 leading-relaxed">
           By creating an account you agree to our Terms & Privacy Policy.

@@ -1,17 +1,33 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth.js";
 
 const Login = () => {
   const [role, setRole] = useState("user");
   const [form, setForm] = useState({ email: "", password: "" });
+  const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = location.state?.from?.pathname || "/profile";
 
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // For now just log (no API call as requested)
-    console.log("[LOGIN SUBMIT]", { role, ...form });
+    setLoading(true);
+    setError("");
+    try {
+      console.log("[LOGIN SUBMIT]", { role, ...form });
+      await login({ role, ...form });
+      navigate(redirectTo, { replace: true });
+    } catch (err) {
+      setError(err?.data?.error || err.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -70,11 +86,17 @@ const Login = () => {
             className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white placeholder-white/40 text-sm"
           />
         </div>
+        {error && (
+          <div className="text-xs text-rose-400 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
+            {error}
+          </div>
+        )}
         <button
           type="submit"
-          className="w-full h-12 rounded-xl font-semibold text-sm tracking-wide bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all"
+          disabled={loading}
+          className="w-full h-12 rounded-xl font-semibold text-sm tracking-wide bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Continue
+          {loading ? "Signing in..." : "Continue"}
         </button>
         <p className="text-[11px] text-white/40 leading-relaxed">
           By continuing you agree to our Terms & Privacy Policy.
