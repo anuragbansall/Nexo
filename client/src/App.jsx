@@ -4,19 +4,10 @@ import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import About from "./pages/About";
+import Safety from "./pages/Safety";
+import Download from "./pages/Download";
 
-// Placeholder simple pages (can be replaced later)
-const About = () => (
-  <div className="py-40 text-center text-white">About Nexo (placeholder)</div>
-);
-const Safety = () => (
-  <div className="py-40 text-center text-white">
-    Safety & Trust (placeholder)
-  </div>
-);
-const Download = () => (
-  <div className="py-40 text-center text-white">Download App (placeholder)</div>
-);
 const NotFound = () => (
   <div className="py-40 text-center text-white">404 • Page not found</div>
 );
