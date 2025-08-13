@@ -1,5 +1,6 @@
 import Captain from "../models/captain.model.js";
 import { createCaptain } from "../services/captain.service.js";
+import BlacklistToken from "../models/blacklistToken.model.js";
 
 import { validationResult } from "express-validator";
 
@@ -59,6 +60,33 @@ export const loginCaptain = async (req, res) => {
     });
 
     res.status(200).json({ captain, token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const logoutCaptain = async (req, res) => {
+  const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized access." });
+  }
+
+  try {
+    await BlacklistToken.create({ token });
+
+    res.clearCookie("token");
+    res.status(200).json({ message: "Logged out successfully." });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const getCaptainProfile = async (req, res) => {
+  try {
+    const captain = req.captain;
+
+    res.status(200).json({ captain });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
