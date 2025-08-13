@@ -10,7 +10,7 @@ const Footer = () => {
               <span className="text-white font-black tracking-tight">N</span>
             </div>
             <span className="text-white font-semibold text-lg tracking-tight select-none">
-              Nexo
+              exo
             </span>
           </div>
           <p className="text-white/40 leading-relaxed text-xs max-w-xs">

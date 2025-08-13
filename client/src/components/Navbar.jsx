@@ -17,7 +17,7 @@ const Navbar = () => {
             <span className="text-white font-black tracking-tight">N</span>
           </div>
           <span className="text-white font-semibold text-lg tracking-tight select-none">
-            Nexo
+            exo
           </span>
         </Link>
         <ul className="hidden md:flex items-center gap-10 text-sm font-medium">
