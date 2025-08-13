@@ -36,6 +36,6 @@ userRouter.post(
 
 userRouter.get("/profile", authenticateUser, getUserProfile);
 
-userRouter.post("/logout", logoutUser);
+userRouter.post("/logout", authenticateUser, logoutUser);
 
 export default userRouter;
