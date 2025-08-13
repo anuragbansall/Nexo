@@ -5,18 +5,53 @@ import { AuthContext } from "./authContextCore.js";
 import { userApi, captainApi } from "../lib/api.js";
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("nexo_auth_user")) || null;
-    } catch {
-      return null;
-    }
-  });
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true); // bootstrap + in-flight profile fetch
+  const [authError, setAuthError] = useState(null);
 
+  // Bootstrap: attempt to discover existing session via cookies (user first, then captain)
   useEffect(() => {
-    if (user) localStorage.setItem("nexo_auth_user", JSON.stringify(user));
-    else localStorage.removeItem("nexo_auth_user");
-  }, [user]);
+    let cancelled = false;
+    (async () => {
+      setAuthLoading(true);
+      setAuthError(null);
+      try {
+        // Try user profile
+        try {
+          const resUser = await userApi.profile();
+          if (!cancelled) {
+            const entity = resUser.user;
+            if (entity) {
+              setUser({ role: "user", ...entity });
+              return; // success
+            }
+          }
+        } catch (eUser) {
+          // Only proceed to captain if unauthorized / not found
+        }
+        // Try captain profile
+        try {
+          const resCap = await captainApi.profile();
+          if (!cancelled) {
+            const entity = resCap.captain;
+            if (entity) {
+              setUser({ role: "captain", ...entity });
+              return;
+            }
+          }
+        } catch (eCap) {
+          // No active session
+        }
+      } catch (err) {
+        if (!cancelled) setAuthError(err?.message || "Auth bootstrap failed");
+      } finally {
+        if (!cancelled) setAuthLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const login = useCallback(async ({ role, email, password }) => {
     const api = role === "captain" ? captainApi : userApi;
@@ -53,7 +88,6 @@ export const AuthProvider = ({ children }) => {
         const api = role === "captain" ? captainApi : userApi;
         await api.logout();
       } catch (err) {
-        // swallow logout network errors silently but keep for debug
         console.warn("Logout request failed (ignored):", err?.message);
       }
       setUser(null);
@@ -64,6 +98,8 @@ export const AuthProvider = ({ children }) => {
   const value = {
     user,
     isAuthenticated: !!user,
+    authLoading,
+    authError,
     login,
     register,
     logout,

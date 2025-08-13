@@ -10,7 +10,7 @@ const Navbar = () => {
     { label: "About", to: "/about" },
   ];
 
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout, authLoading } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -56,7 +56,12 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="relative flex items-center gap-3">
-          {!isAuthenticated && (
+          {authLoading && (
+            <div className="hidden h-10 w-32 animate-pulse items-center justify-center rounded-full border border-white/10 text-xs font-medium text-white/40 sm:inline-flex">
+              Loading
+            </div>
+          )}
+          {!authLoading && !isAuthenticated && (
             <>
               <NavLink
                 to="/login"
@@ -72,7 +77,7 @@ const Navbar = () => {
               </NavLink>
             </>
           )}
-          {isAuthenticated && (
+          {!authLoading && isAuthenticated && (
             <div className="relative">
               <button
                 onClick={() => setMenuOpen((o) => !o)}
