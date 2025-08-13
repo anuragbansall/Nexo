@@ -29,17 +29,17 @@ const Footer = () => {
 
   return (
     <footer className="relative border-t border-white/10 bg-black/60 backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-14 grid md:grid-cols-4 gap-12 text-sm">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-14 text-sm sm:px-8 md:grid-cols-4">
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-1 ring-white/20">
-              <span className="text-white font-black tracking-tight">N</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 shadow-lg ring-1 shadow-indigo-500/30 ring-white/20">
+              <span className="font-black tracking-tight text-white">N</span>
             </div>
-            <span className="text-white font-semibold text-lg tracking-tight select-none">
+            <span className="text-lg font-semibold tracking-tight text-white select-none">
               exo
             </span>
           </div>
-          <p className="text-white/40 leading-relaxed text-xs max-w-xs">
+          <p className="max-w-xs text-xs leading-relaxed text-white/40">
             Next generation mobility platform delivering safer, smarter &
             greener rides.
           </p>
@@ -50,14 +50,14 @@ const Footer = () => {
                 href={`https://${s}.com`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-white/50 hover:text-white transition-colors text-xs uppercase tracking-wider"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-xs tracking-wider text-white/50 uppercase transition-colors hover:bg-white/10 hover:text-white"
               >
                 {s[0]}
               </a>
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 md:col-span-3 gap-10">
+        <div className="grid grid-cols-2 gap-10 md:col-span-3 md:grid-cols-3">
           <div className="space-y-3">
             <h3 className={sectionClass}>Company</h3>
             <ul className="space-y-2">

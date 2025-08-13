@@ -29,24 +29,24 @@ const Navbar = () => {
   }
 
   return (
-    <header className="fixed top-0 inset-x-0 z-40 backdrop-blur-lg bg-black/40 border-b border-white/10">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-8 h-16">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-black/40 backdrop-blur-lg">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-8">
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-1 ring-white/20">
-            <span className="text-white font-black tracking-tight">N</span>
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 shadow-lg ring-1 shadow-indigo-500/30 ring-white/20">
+            <span className="font-black tracking-tight text-white">N</span>
           </div>
-          <span className="text-white font-semibold text-lg tracking-tight select-none">
+          <span className="text-lg font-semibold tracking-tight text-white select-none">
             exo
           </span>
         </Link>
-        <ul className="hidden md:flex items-center gap-10 text-sm font-medium">
+        <ul className="hidden items-center gap-10 text-sm font-medium md:flex">
           {navLinks.map((link) => (
             <li key={link.label}>
               <NavLink
                 to={link.to}
                 className={({ isActive }) =>
-                  `text-white/70 hover:text-white transition-colors ${
-                    isActive ? "text-white font-semibold" : ""
+                  `text-white/70 transition-colors hover:text-white ${
+                    isActive ? "font-semibold text-white" : ""
                   }`
                 }
               >
@@ -55,18 +55,18 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className="flex items-center gap-3 relative">
+        <div className="relative flex items-center gap-3">
           {!isAuthenticated && (
             <>
               <NavLink
                 to="/login"
-                className="hidden sm:inline-flex items-center text-sm font-medium px-4 h-9 rounded-full text-white/90 hover:text-white border border-white/20 hover:border-white/40 transition-colors"
+                className="hidden h-9 items-center rounded-full border border-white/20 px-4 text-sm font-medium text-white/90 transition-colors hover:border-white/40 hover:text-white sm:inline-flex"
               >
                 Sign in
               </NavLink>
               <NavLink
                 to="/register"
-                className="inline-flex items-center text-sm font-semibold px-5 h-10 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all"
+                className="inline-flex h-10 items-center rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all hover:shadow-indigo-500/50"
               >
                 Get the App
               </NavLink>
@@ -76,13 +76,13 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => setMenuOpen((o) => !o)}
-                className="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 focus:outline-none focus:ring-2 focus:ring-indigo-400/60"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 focus:ring-2 focus:ring-indigo-400/60 focus:outline-none"
               >
                 {initials}
               </button>
               {menuOpen && (
-                <div className="absolute right-0 mt-3 w-56 rounded-2xl border border-white/10 bg-neutral-900/95 backdrop-blur-xl p-3 shadow-xl shadow-black/50 z-50">
-                  <div className="px-2 py-2 text-xs text-white/50 uppercase tracking-wider">
+                <div className="absolute right-0 z-50 mt-3 w-56 rounded-2xl border border-white/10 bg-neutral-900/95 p-3 shadow-xl shadow-black/50 backdrop-blur-xl">
+                  <div className="px-2 py-2 text-xs tracking-wider text-white/50 uppercase">
                     Account
                   </div>
                   <button
@@ -90,14 +90,14 @@ const Navbar = () => {
                       navigate("/profile");
                       setMenuOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 rounded-xl text-sm text-white/80 hover:text-white hover:bg-white/5"
+                    className="w-full rounded-xl px-3 py-2 text-left text-sm text-white/80 hover:bg-white/5 hover:text-white"
                   >
                     Profile
                   </button>
-                  <div className="h-px my-2 bg-white/10" />
+                  <div className="my-2 h-px bg-white/10" />
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left px-3 py-2 rounded-xl text-sm text-rose-300 hover:text-white hover:bg-rose-500/10"
+                    className="w-full rounded-xl px-3 py-2 text-left text-sm text-rose-300 hover:bg-rose-500/10 hover:text-white"
                   >
                     Logout
                   </button>

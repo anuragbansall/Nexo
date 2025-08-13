@@ -21,25 +21,25 @@ const platforms = [
 const Download = () => {
   return (
     <div className="relative py-24">
-      <div className="max-w-5xl mx-auto px-4 sm:px-8">
-        <header className="max-w-3xl mb-16 text-center mx-auto">
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-transparent">
+      <div className="mx-auto max-w-5xl px-4 sm:px-8">
+        <header className="mx-auto mb-16 max-w-3xl text-center">
+          <h1 className="bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-4xl font-black tracking-tight text-transparent sm:text-5xl">
             Get the Nexo App
           </h1>
-          <p className="mt-6 text-white/60 text-lg leading-relaxed">
+          <p className="mt-6 text-lg leading-relaxed text-white/60">
             Optimized for realtime performance, low battery impact, and
             accessible motion design. Install on your preferred platform.
           </p>
         </header>
 
-        <div className="grid sm:grid-cols-3 gap-8 mb-24">
+        <div className="mb-24 grid gap-8 sm:grid-cols-3">
           {platforms.map((p) => (
             <div
               key={p.name}
-              className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 flex flex-col items-center text-center group overflow-hidden"
+              className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center backdrop-blur-xl"
             >
               <div
-                className={`h-16 w-16 rounded-2xl mb-4 bg-gradient-to-br ${p.gradient} flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-black/30`}
+                className={`mb-4 h-16 w-16 rounded-2xl bg-gradient-to-br ${p.gradient} flex items-center justify-center text-lg font-bold text-white shadow-lg shadow-black/30`}
               >
                 {p.name[0]}
               </div>
@@ -50,18 +50,18 @@ const Download = () => {
                 High fidelity experience tailored for {p.name} users.
               </p>
               <button
-                className={`mt-5 text-[11px] uppercase tracking-wider font-medium px-4 h-9 rounded-full bg-gradient-to-r ${p.gradient} text-white shadow-lg shadow-black/30 hover:shadow-black/50 transition-all`}
+                className={`mt-5 h-9 rounded-full bg-gradient-to-r px-4 text-[11px] font-medium tracking-wider uppercase ${p.gradient} text-white shadow-lg shadow-black/30 transition-all hover:shadow-black/50`}
               >
                 {p.badge}
               </button>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-white/0 via-white/5 to-white/10" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
           ))}
         </div>
 
-        <section className="max-w-3xl mx-auto text-center space-y-6">
+        <section className="mx-auto max-w-3xl space-y-6 text-center">
           <h2 className="text-xl font-semibold tracking-tight">Why native?</h2>
-          <p className="text-sm text-white/60 leading-relaxed">
+          <p className="text-sm leading-relaxed text-white/60">
             We leverage platform-specific APIs for haptics, low-latency
             geolocation, background activity efficiency, and secure credential
             storage. Our web progressive app offers parity for lightweight

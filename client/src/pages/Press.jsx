@@ -19,24 +19,24 @@ const articles = [
 ];
 
 const Press = () => (
-  <div className="py-24 px-4 sm:px-8 max-w-4xl mx-auto">
-    <h1 className="text-4xl font-black tracking-tight bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-transparent">
+  <div className="mx-auto max-w-4xl px-4 py-24 sm:px-8">
+    <h1 className="bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-4xl font-black tracking-tight text-transparent">
       Press
     </h1>
-    <p className="mt-6 text-white/60 leading-relaxed text-lg">
+    <p className="mt-6 text-lg leading-relaxed text-white/60">
       Media resources and recent coverage.
     </p>
     <div className="mt-12 space-y-6">
       {articles.map((a) => (
         <div
           key={a.title}
-          className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl"
+          className="flex flex-col justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:flex-row sm:items-center"
         >
           <div>
-            <div className="text-xs uppercase tracking-wider text-indigo-300 font-semibold">
+            <div className="text-xs font-semibold tracking-wider text-indigo-300 uppercase">
               {a.source}
             </div>
-            <h2 className="text-sm font-semibold text-white mt-1">{a.title}</h2>
+            <h2 className="mt-1 text-sm font-semibold text-white">{a.title}</h2>
           </div>
           <span className="text-[11px] text-white/40">{a.date}</span>
         </div>

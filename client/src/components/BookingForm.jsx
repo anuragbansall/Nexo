@@ -16,36 +16,36 @@ const BookingForm = () => {
   return (
     <div
       id="ride"
-      className="w-full max-w-xl bg-white/5 backdrop-blur-xl border border-white/15 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/40 ring-1 ring-black/50"
+      className="w-full max-w-xl rounded-3xl border border-white/15 bg-white/5 p-6 shadow-2xl ring-1 shadow-black/40 ring-black/50 backdrop-blur-xl sm:p-8"
     >
-      <h2 className="text-white text-xl font-semibold mb-4 tracking-tight">
+      <h2 className="mb-4 text-xl font-semibold tracking-tight text-white">
         Book your ride
       </h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="space-y-4">
           <div className="group relative">
-            <label className="text-xs uppercase tracking-wider font-semibold text-white/60">
+            <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
               Pickup
             </label>
             <input
               value={pickup}
               onChange={(e) => setPickup(e.target.value)}
               placeholder="Enter pickup location"
-              className="mt-1 w-full h-12 px-4 rounded-xl bg-white/7 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/70 text-white placeholder-white/35 text-sm"
+              className="mt-1 h-12 w-full rounded-xl border border-white/15 bg-white/7 px-4 text-sm text-white placeholder-white/35 focus:ring-2 focus:ring-indigo-500/70 focus:outline-none"
             />
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-end pb-2 text-white/30 group-focus-within:text-indigo-400">
               📍
             </div>
           </div>
           <div className="group relative">
-            <label className="text-xs uppercase tracking-wider font-semibold text-white/60">
+            <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
               Dropoff
             </label>
             <input
               value={dropoff}
               onChange={(e) => setDropoff(e.target.value)}
               placeholder="Enter destination"
-              className="mt-1 w-full h-12 px-4 rounded-xl bg-white/7 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/70 text-white placeholder-white/35 text-sm"
+              className="mt-1 h-12 w-full rounded-xl border border-white/15 bg-white/7 px-4 text-sm text-white placeholder-white/35 focus:ring-2 focus:ring-indigo-500/70 focus:outline-none"
             />
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-end pb-2 text-white/30 group-focus-within:text-indigo-400">
               🎯
@@ -59,10 +59,10 @@ const BookingForm = () => {
               type="button"
               key={type}
               onClick={() => setRideType(type)}
-              className={`flex-1 h-11 rounded-xl text-sm font-medium capitalize border transition-all backdrop-blur-md ${
+              className={`h-11 flex-1 rounded-xl border text-sm font-medium capitalize backdrop-blur-md transition-all ${
                 rideType === type
-                  ? "bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white border-transparent shadow-lg shadow-indigo-500/30"
-                  : "bg-white/5 border-white/15 text-white/70 hover:text-white hover:border-white/35"
+                  ? "border-transparent bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30"
+                  : "border-white/15 bg-white/5 text-white/70 hover:border-white/35 hover:text-white"
               }`}
             >
               {type}
@@ -73,10 +73,10 @@ const BookingForm = () => {
         <button
           type="submit"
           disabled={loading || !pickup || !dropoff}
-          className="w-full h-12 rounded-xl font-semibold text-sm tracking-wide bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-sm font-semibold tracking-wide text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading && (
-            <span className="w-4 h-4 border-2 border-white/40 border-t-white animate-spin rounded-full"></span>
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"></span>
           )}
           {loading ? "Finding nearby drivers..." : "Request Ride"}
         </button>

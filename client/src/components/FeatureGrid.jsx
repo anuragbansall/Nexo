@@ -37,22 +37,22 @@ const FeatureGrid = () => {
   return (
     <section id="features" className="relative py-28">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.15),transparent_60%)]"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <h2 className="text-center text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent pb-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8">
+        <h2 className="bg-gradient-to-r from-white via-white to-white/60 bg-clip-text pb-14 text-center text-3xl font-bold text-transparent sm:text-4xl">
           Designed for elevated journeys
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
             <div
               key={f.title}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 flex flex-col gap-3 hover:border-white/25 transition-colors"
+              className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl transition-colors hover:border-white/25"
             >
               <div className="text-3xl drop-shadow-sm">{f.icon}</div>
-              <h3 className="text-lg font-semibold text-white tracking-tight">
+              <h3 className="text-lg font-semibold tracking-tight text-white">
                 {f.title}
               </h3>
               <p className="text-sm leading-relaxed text-white/60">{f.desc}</p>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none bg-gradient-to-br from-indigo-500/0 via-violet-500/5 to-fuchsia-500/20"></div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-violet-500/5 to-fuchsia-500/20 opacity-0 transition-opacity group-hover:opacity-100"></div>
             </div>
           ))}
         </div>

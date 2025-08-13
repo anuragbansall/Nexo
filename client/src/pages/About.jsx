@@ -33,12 +33,12 @@ const timeline = [
 const About = () => {
   return (
     <div className="relative py-24">
-      <div className="max-w-6xl mx-auto px-4 sm:px-8">
-        <header className="max-w-3xl mb-16">
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-transparent">
+      <div className="mx-auto max-w-6xl px-4 sm:px-8">
+        <header className="mb-16 max-w-3xl">
+          <h1 className="bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-4xl font-black tracking-tight text-transparent sm:text-5xl">
             About Nexo
           </h1>
-          <p className="mt-6 text-white/60 text-lg leading-relaxed">
+          <p className="mt-6 text-lg leading-relaxed text-white/60">
             We are building the next generation urban mobility layer—fast, safe,
             transparent and sustainably optimized. Nexo blends realtime
             geospatial intelligence with human-first design to move people
@@ -46,16 +46,16 @@ const About = () => {
           </p>
         </header>
 
-        <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+        <section className="mb-24 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="rounded-2xl bg-white/[0.04] border border-white/10 p-6 backdrop-blur-xl"
+              className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl"
             >
               <div className="text-2xl font-semibold tracking-tight text-white">
                 {s.value}
               </div>
-              <div className="text-[11px] uppercase tracking-wider text-white/40 font-medium mt-2">
+              <div className="mt-2 text-[11px] font-medium tracking-wider text-white/40 uppercase">
                 {s.label}
               </div>
             </div>
@@ -63,19 +63,19 @@ const About = () => {
         </section>
 
         <section className="mb-24">
-          <h2 className="text-xl font-semibold tracking-tight mb-8">
+          <h2 className="mb-8 text-xl font-semibold tracking-tight">
             Our Journey
           </h2>
-          <ol className="relative border-s border-white/10 ml-2">
+          <ol className="relative ml-2 border-s border-white/10">
             {timeline.map((item) => (
-              <li key={item.year} className="mb-10 ms-6">
-                <span className="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 ring-2 ring-neutral-950 text-[10px] font-semibold text-white">
+              <li key={item.year} className="ms-6 mb-10">
+                <span className="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-[10px] font-semibold text-white ring-2 ring-neutral-950">
                   {item.year.split(" ")[0]}
                 </span>
-                <h3 className="font-semibold text-white text-sm tracking-wide">
+                <h3 className="text-sm font-semibold tracking-wide text-white">
                   {item.title}
                 </h3>
-                <p className="text-sm text-white/60 mt-1 leading-relaxed">
+                <p className="mt-1 text-sm leading-relaxed text-white/60">
                   {item.text}
                 </p>
               </li>
@@ -84,10 +84,10 @@ const About = () => {
         </section>
 
         <section className="max-w-3xl">
-          <h2 className="text-xl font-semibold tracking-tight mb-4">
+          <h2 className="mb-4 text-xl font-semibold tracking-tight">
             What drives us
           </h2>
-          <p className="text-white/60 leading-relaxed text-sm">
+          <p className="text-sm leading-relaxed text-white/60">
             Millions of urban trips are still inefficient—wasting time, fuel,
             and human energy. Nexo orchestrates demand & supply in real time,
             rewarding availability, safety, and eco-efficiency. Our long-term

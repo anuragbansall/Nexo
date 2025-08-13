@@ -93,15 +93,15 @@ const Register = () => {
   const handleChange = role === "user" ? handleUserChange : handleCaptainChange;
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-0 py-24">
+    <div className="mx-auto max-w-2xl px-4 py-24 sm:px-0">
       <div className="mb-10 text-center">
         <h1 className="text-3xl font-bold tracking-tight">Create account</h1>
-        <p className="text-white/50 text-sm mt-2">
+        <p className="mt-2 text-sm text-white/50">
           Join Nexo as a {role === "user" ? "rider" : "captain"}.
         </p>
       </div>
 
-      <div className="flex mb-8 rounded-xl overflow-hidden border border-white/10 w-full">
+      <div className="mb-8 flex w-full overflow-hidden rounded-xl border border-white/10">
         {["user", "captain"].map((r) => (
           <button
             key={r}
@@ -120,11 +120,11 @@ const Register = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-8 bg-white/5 rounded-2xl border border-white/10 p-8 backdrop-blur-md"
+        className="space-y-8 rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md"
       >
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid gap-6 sm:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-xs font-semibold uppercase tracking-wider text-white/60">
+            <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
               First Name
             </label>
             <input
@@ -133,11 +133,11 @@ const Register = () => {
               value={form.first}
               onChange={handleChange}
               placeholder="John"
-              className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white placeholder-white/40 text-sm"
+              className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-indigo-500/60 focus:outline-none"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-semibold uppercase tracking-wider text-white/60">
+            <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
               Last Name
             </label>
             <input
@@ -146,13 +146,13 @@ const Register = () => {
               value={form.last}
               onChange={handleChange}
               placeholder="Doe"
-              className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white placeholder-white/40 text-sm"
+              className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-indigo-500/60 focus:outline-none"
             />
           </div>
         </div>
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid gap-6 sm:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-xs font-semibold uppercase tracking-wider text-white/60">
+            <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
               Email
             </label>
             <input
@@ -162,11 +162,11 @@ const Register = () => {
               value={form.email}
               onChange={handleChange}
               placeholder="you@example.com"
-              className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white placeholder-white/40 text-sm"
+              className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-indigo-500/60 focus:outline-none"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-semibold uppercase tracking-wider text-white/60">
+            <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
               Password
             </label>
             <input
@@ -176,7 +176,7 @@ const Register = () => {
               value={form.password}
               onChange={handleChange}
               placeholder="••••••"
-              className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white placeholder-white/40 text-sm"
+              className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-indigo-500/60 focus:outline-none"
             />
           </div>
         </div>
@@ -186,9 +186,9 @@ const Register = () => {
             <h2 className="text-sm font-semibold tracking-wide text-white/70">
               Vehicle Details
             </h2>
-            <div className="grid sm:grid-cols-3 gap-6">
+            <div className="grid gap-6 sm:grid-cols-3">
               <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-white/60">
+                <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
                   Model
                 </label>
                 <input
@@ -197,11 +197,11 @@ const Register = () => {
                   value={form.vehicle.model}
                   onChange={handleChange}
                   placeholder="Tesla 3"
-                  className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white placeholder-white/40 text-sm"
+                  className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-indigo-500/60 focus:outline-none"
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-white/60">
+                <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
                   Color
                 </label>
                 <input
@@ -210,11 +210,11 @@ const Register = () => {
                   value={form.vehicle.color}
                   onChange={handleChange}
                   placeholder="Black"
-                  className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white placeholder-white/40 text-sm"
+                  className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-indigo-500/60 focus:outline-none"
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-white/60">
+                <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
                   Plate
                 </label>
                 <input
@@ -223,13 +223,13 @@ const Register = () => {
                   value={form.vehicle.plate}
                   onChange={handleChange}
                   placeholder="AB12 XYZ"
-                  className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white placeholder-white/40 text-sm"
+                  className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-indigo-500/60 focus:outline-none"
                 />
               </div>
             </div>
-            <div className="grid sm:grid-cols-3 gap-6">
+            <div className="grid gap-6 sm:grid-cols-3">
               <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-white/60">
+                <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
                   Capacity
                 </label>
                 <input
@@ -240,18 +240,18 @@ const Register = () => {
                   onChange={handleChange}
                   placeholder="4"
                   type="number"
-                  className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white placeholder-white/40 text-sm"
+                  className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-indigo-500/60 focus:outline-none"
                 />
               </div>
               <div className="space-y-2 sm:col-span-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-white/60">
+                <label className="text-xs font-semibold tracking-wider text-white/60 uppercase">
                   Type
                 </label>
                 <select
                   name="vehicle.type"
                   value={form.vehicle.type}
                   onChange={handleChange}
-                  className="h-12 w-full px-4 rounded-xl bg-white/10 border border-white/15 focus:outline-none focus:ring-2 focus:ring-indigo-500/60 text-white text-sm"
+                  className="h-12 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white focus:ring-2 focus:ring-indigo-500/60 focus:outline-none"
                 >
                   {vehicleTypes.map((v) => (
                     <option key={v.value} value={v.value}>
@@ -265,27 +265,27 @@ const Register = () => {
         )}
 
         {error && (
-          <div className="text-xs text-rose-400 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
+          <div className="rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-xs text-rose-400">
             {error}
           </div>
         )}
         <button
           type="submit"
           disabled={loading}
-          className="w-full h-12 rounded-xl font-semibold text-sm tracking-wide bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-12 w-full rounded-xl bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-sm font-semibold tracking-wide text-white shadow-lg shadow-indigo-500/30 transition-all hover:shadow-indigo-500/50 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading
             ? "Creating..."
             : `Create ${role === "user" ? "User" : "Captain"} Account`}
         </button>
-        <p className="text-[11px] text-white/40 leading-relaxed">
+        <p className="text-[11px] leading-relaxed text-white/40">
           By creating an account you agree to our Terms & Privacy Policy.
         </p>
         <p className="text-xs text-white/60">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-indigo-400 hover:text-indigo-300 font-medium"
+            className="font-medium text-indigo-400 hover:text-indigo-300"
           >
             Login now
           </Link>

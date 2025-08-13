@@ -3,7 +3,7 @@ export const API_BASE =
 
 async function request(
   path,
-  { method = "GET", body, token, auth = "user" } = {}
+  { method = "GET", body, token, auth = "user" } = {},
 ) {
   const headers = { "Content-Type": "application/json" };
   if (token) headers.Authorization = `Bearer ${token}`;

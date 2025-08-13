@@ -16,11 +16,11 @@ const faqs = [
 ];
 
 const HelpCenter = () => (
-  <div className="py-24 px-4 sm:px-8 max-w-4xl mx-auto">
-    <h1 className="text-4xl font-black tracking-tight bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-transparent">
+  <div className="mx-auto max-w-4xl px-4 py-24 sm:px-8">
+    <h1 className="bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-4xl font-black tracking-tight text-transparent">
       Help Center
     </h1>
-    <p className="mt-6 text-white/60 leading-relaxed text-lg">
+    <p className="mt-6 text-lg leading-relaxed text-white/60">
       Quick answers to common questions.
     </p>
     <div className="mt-12 space-y-6">
@@ -30,7 +30,7 @@ const HelpCenter = () => (
           className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl"
         >
           <h2 className="text-sm font-semibold text-white">{item.q}</h2>
-          <p className="mt-2 text-xs text-white/60 leading-relaxed">{item.a}</p>
+          <p className="mt-2 text-xs leading-relaxed text-white/60">{item.a}</p>
         </div>
       ))}
     </div>
