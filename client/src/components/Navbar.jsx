@@ -37,12 +37,18 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="flex items-center gap-3">
-          <button className="hidden sm:inline-flex items-center text-sm font-medium px-4 h-9 rounded-full text-white/90 hover:text-white border border-white/20 hover:border-white/40 transition-colors">
+          <NavLink
+            to="/login"
+            className="hidden sm:inline-flex items-center text-sm font-medium px-4 h-9 rounded-full text-white/90 hover:text-white border border-white/20 hover:border-white/40 transition-colors"
+          >
             Sign in
-          </button>
-          <button className="inline-flex items-center text-sm font-semibold px-5 h-10 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all">
+          </NavLink>
+          <NavLink
+            to="/register"
+            className="inline-flex items-center text-sm font-semibold px-5 h-10 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all"
+          >
             Get the App
-          </button>
+          </NavLink>
         </div>
       </nav>
     </header>
