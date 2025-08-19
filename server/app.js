@@ -4,7 +4,6 @@ import cors from "cors";
 import userRouter from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
 import captainRouter from "./routes/captain.routes.js";
-import rideRouter from "./routes/ride.routes.js";
 
 dotenv.config();
 
@@ -18,7 +17,6 @@ app.use(cookieParser());
 
 app.use("/api/users", userRouter);
 app.use("/api/captains", captainRouter);
-app.use("/api/rides", rideRouter);
 
 app.get("/api", (req, res) => {
   res.send("Hello World!");

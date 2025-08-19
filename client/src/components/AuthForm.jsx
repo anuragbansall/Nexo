@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 
 function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: {
+      first: "",
+      last: "",
+    },
     email: "",
     password: "",
     vehicle: {
@@ -29,6 +31,15 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
           [key]: value,
         },
       }));
+    } else if (name.startsWith("fullName.")) {
+      const key = name.split(".")[1];
+      setFormData((prev) => ({
+        ...prev,
+        fullName: {
+          ...prev.fullName,
+          [key]: value,
+        },
+      }));
     } else {
       setFormData((prev) => ({
         ...prev,
@@ -46,10 +57,9 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
       delete data.vehicle;
     }
 
-    // Remove first/last name if not registering
+    // Remove fullName if not registering
     if (mode !== "register") {
-      delete data.firstName;
-      delete data.lastName;
+      delete data.fullName;
     }
 
     onSubmit(data);
@@ -74,8 +84,8 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
             type="text"
             placeholder="First Name"
             className="input"
-            name="firstName"
-            value={formData.firstName}
+            name="fullName.first"
+            value={formData.fullName.first}
             onChange={handleChange}
             required
           />
@@ -83,8 +93,8 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
             type="text"
             placeholder="Last Name"
             className="input"
-            name="lastName"
-            value={formData.lastName}
+            name="fullName.last"
+            value={formData.fullName.last}
             onChange={handleChange}
             required
           />

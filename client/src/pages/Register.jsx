@@ -1,14 +1,16 @@
 import React from "react";
 import AuthForm from "../components/AuthForm";
-import { NavLink, useParams, useLocation } from "react-router-dom";
+import { NavLink, useParams, useLocation, useNavigate } from "react-router-dom";
 import RegisterBgImage from "../assets/register-bg.jpg";
 
 function Register() {
   const { role } = useParams();
   const location = useLocation();
 
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
-    console.log("Form submitted:", data);
+    console.log("Registering user:", data);
   };
 
   return (
