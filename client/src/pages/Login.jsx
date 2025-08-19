@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import AuthForm from "../components/AuthForm";
-import { NavLink, useParams, useLocation } from "react-router-dom";
+import { NavLink, useParams, useLocation, useNavigate } from "react-router-dom";
 import loginBgImage from "../assets/login-bg.jpg";
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
   const { role } = useParams();
   const location = useLocation();
 
+  const { loginUser, loginCaptain, isAuthenticated } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     console.log("Form submitted:", data);
+    if (role === "user") {
+      loginUser(data);
+    } else if (role === "captain") {
+      loginCaptain(data);
+    }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <main className="flex h-screen w-full">

@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
+  const { loading, error } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     fullName: {
       first: "",
@@ -14,7 +17,7 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
       model: "",
       plate: "",
       capacity: "",
-      type: "",
+      type: null,
     },
     role: role,
     mode: mode,
@@ -28,7 +31,8 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
         ...prev,
         vehicle: {
           ...prev.vehicle,
-          [key]: value,
+          [key]:
+            key === "capacity" ? (value === "" ? "" : Number(value)) : value,
         },
       }));
     } else if (name.startsWith("fullName.")) {
@@ -55,6 +59,13 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
     // Remove vehicle info if not captain or not registering
     if (!(mode === "register" && role === "captain")) {
       delete data.vehicle;
+    } else {
+      // Ensure capacity is a number
+      data.vehicle = {
+        ...data.vehicle,
+        capacity:
+          data.vehicle.capacity === "" ? "" : Number(data.vehicle.capacity),
+      };
     }
 
     // Remove fullName if not registering
@@ -159,6 +170,7 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
               value={formData.vehicle.capacity}
               onChange={handleChange}
               required
+              min="1"
             />
           </div>
 
@@ -169,13 +181,19 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
             onChange={handleChange}
             required
           >
-            <option disabled>Select Vehicle Type</option>
+            <option value={null} disabled>
+              Select Vehicle Type
+            </option>
             <option value="car">Car</option>
             <option value="bike">Bike</option>
             <option value="auto">Auto</option>
           </select>
         </div>
       )}
+
+      <p className="text-red-500" role="alert">
+        {error}
+      </p>
 
       <Link
         to={mode === "login" ? `/register/${role}` : `/login/${role}`}
@@ -189,7 +207,7 @@ function AuthForm({ role = "user", mode = "login", onSubmit = () => {} }) {
       </Link>
 
       <button type="submit" className="dark-btn w-full">
-        {mode === "login" ? "Login" : "Register"}
+        {loading ? "Loading..." : mode === "login" ? "Login" : "Register"}
       </button>
     </form>
   );
