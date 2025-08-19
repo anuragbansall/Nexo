@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+.dark-btn {
+  @apply max-w-full cursor-pointer rounded-md bg-neutral-900 px-6 py-2 text-lg font-semibold text-white;
+}
+
+.input {
+  @apply w-full rounded-md border border-gray-300 px-4 py-2 text-lg;
+}
+
+.input-group {
+  @apply flex w-full gap-4;
+}

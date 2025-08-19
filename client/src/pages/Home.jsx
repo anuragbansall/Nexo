@@ -12,9 +12,7 @@ function Home() {
 
       <div className="absolute bottom-0 left-1/2 flex w-full max-w-full -translate-x-1/2 flex-col items-center gap-6 bg-white p-6 md:w-2xl md:rounded-t-2xl">
         <h1 className="text-3xl font-bold text-gray-800">Welcome to Nexo</h1>
-        <button className="w-lg max-w-full cursor-pointer rounded-md bg-neutral-900 px-6 py-2 text-lg font-semibold text-white">
-          Continue
-        </button>
+        <button className="dark-btn w-lg">Continue</button>
       </div>
     </main>
   );
