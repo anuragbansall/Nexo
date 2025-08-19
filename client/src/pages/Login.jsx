@@ -7,6 +7,10 @@ function Login() {
   const { role } = useParams();
   const location = useLocation();
 
+  const onSubmit = (data) => {
+    console.log("Form submitted:", data);
+  };
+
   return (
     <main className="flex h-screen w-full">
       <section className="flex h-full w-full flex-col items-center justify-center p-6 md:w-1/2">
@@ -36,7 +40,7 @@ function Login() {
               </NavLink>
             ))}
           </div>
-          <AuthForm role={role} mode="login" />
+          <AuthForm role={role} mode="login" onSubmit={onSubmit} />
         </div>
       </section>
 

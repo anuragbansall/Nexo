@@ -7,6 +7,10 @@ function Register() {
   const { role } = useParams();
   const location = useLocation();
 
+  const onSubmit = (data) => {
+    console.log("Form submitted:", data);
+  };
+
   return (
     <main className="flex h-screen w-full">
       <section className="flex h-full w-full flex-col items-center justify-center overflow-y-auto p-6 md:w-1/2">
@@ -36,7 +40,7 @@ function Register() {
               </NavLink>
             ))}
           </div>
-          <AuthForm role={role} mode="register" />
+          <AuthForm role={role} mode="register" onSubmit={onSubmit} />
         </div>
       </section>
 
