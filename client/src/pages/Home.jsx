@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Landing from "./Landing";
+import Booking from "./Booking";
 
 function Home() {
   const { isAuthenticated, user, role, loading } = useContext(AuthContext);
@@ -18,9 +19,9 @@ function Home() {
   }
 
   return (
-    <main>
-      <h1>Welcome back!</h1>
-    </main>
+    <>
+      <Booking />
+    </>
   );
 }
 
