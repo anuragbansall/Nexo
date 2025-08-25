@@ -30,7 +30,7 @@ function Register() {
   }, [isAuthenticated, navigate]);
 
   return (
-    <>
+    <main className="flex h-screen w-full">
       <section className="flex h-full w-full flex-col items-center justify-center overflow-y-auto p-6 md:w-1/2">
         <div className="flex w-lg max-w-full flex-col items-center gap-6">
           <h2 className="mb-6 text-4xl font-bold">Register</h2>
@@ -69,7 +69,7 @@ function Register() {
           className="h-full w-full object-cover"
         />
       </section>
-    </>
+    </main>
   );
 }
 
