@@ -68,6 +68,7 @@ function Booking() {
   const [error, setError] = useState(null);
   const [isSuggestionVisible, setIsSuggestionVisible] = useState(false);
   const [activeInput, setActiveInput] = useState(null); // "pickup" or "destination"
+  const [selectedRide, setSelectedRide] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -131,7 +132,7 @@ function Booking() {
       <div
         className={`absolute bottom-0 left-1/2 flex w-full max-w-full -translate-x-1/2 flex-col items-center gap-3 bg-white p-6 md:rounded-t-2xl ${isSuggestionVisible ? "h-full w-screen" : "md:w-2xl"} ${!isSuggestionVisible && "max-h-[25rem]"} overflow-y-auto`}
       >
-        {false && (
+        {true && (
           <>
             <form className="mt-4 w-full space-y-6" onSubmit={handleSubmit}>
               <h2 className="text-center text-3xl font-semibold">
@@ -181,13 +182,15 @@ function Booking() {
 
             {/* Ride Options */}
             {pickup.trim() && destination.trim() && !isSuggestionVisible && (
-              <div className="mt-6 w-full">
+              <div className="relative mt-6 w-full">
                 <h3 className="mb-4 text-2xl font-semibold">Select a ride</h3>
+
                 <div className="space-y-4">
                   {rideOptions.map((ride) => (
                     <div
                       key={ride.id}
-                      className="flex cursor-pointer items-center gap-4 rounded-md border-b border-neutral-200 p-4 transition duration-200 ease-in-out hover:bg-neutral-200"
+                      className={`${selectedRide?.id === ride.id ? "bg-neutral-100 border border-neutral-600" : ""} flex cursor-pointer items-center gap-4 rounded-md border-b border-neutral-200 p-4 transition duration-200 ease-in-out hover:bg-neutral-200`}
+                      onClick={() => setSelectedRide(ride)}
                     >
                       <img
                         src={ride.image}
@@ -214,12 +217,18 @@ function Booking() {
                     </div>
                   ))}
                 </div>
+
+                {selectedRide && (
+                  <button className="dark-btn mt-4 flex w-full items-center justify-between bg-black text-white hover:bg-gray-800">
+                    Confirm <span>Rs. {selectedRide.totalFare}</span>
+                  </button>
+                )}
               </div>
             )}
           </>
         )}
 
-        {true && (
+        {false && (
           <>
             <h2 className="text-2xl font-semibold">
               Looking for nearby drivers
