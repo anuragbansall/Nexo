@@ -189,7 +189,7 @@ function Booking() {
                   {rideOptions.map((ride) => (
                     <div
                       key={ride.id}
-                      className={`${selectedRide?.id === ride.id ? "bg-neutral-100 border border-neutral-600" : ""} flex cursor-pointer items-center gap-4 rounded-md border-b border-neutral-200 p-4 transition duration-200 ease-in-out hover:bg-neutral-200`}
+                      className={`${selectedRide?.id === ride.id ? "border border-neutral-600 bg-neutral-100" : ""} flex cursor-pointer items-center gap-4 rounded-md border-b border-neutral-200 p-4 transition duration-200 ease-in-out hover:bg-neutral-200`}
                       onClick={() => setSelectedRide(ride)}
                     >
                       <img
@@ -220,7 +220,7 @@ function Booking() {
 
                 {selectedRide && (
                   <button className="dark-btn mt-4 flex w-full items-center justify-between bg-black text-white hover:bg-gray-800">
-                    Confirm <span>Rs. {selectedRide.totalFare}</span>
+                    Confirm {">"} <span>Rs. {selectedRide.totalFare}</span>
                   </button>
                 )}
               </div>
