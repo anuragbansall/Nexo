@@ -131,84 +131,123 @@ function Booking() {
       <div
         className={`absolute bottom-0 left-1/2 flex w-full max-w-full -translate-x-1/2 flex-col items-center gap-3 bg-white p-6 md:rounded-t-2xl ${isSuggestionVisible ? "h-full w-screen" : "md:w-2xl"} ${!isSuggestionVisible && "max-h-[25rem]"} overflow-y-auto`}
       >
-        <form className="mt-4 w-full space-y-6" onSubmit={handleSubmit}>
-          <h2 className="text-center text-3xl font-semibold">Find a trip 🗾</h2>
-          <input
-            type="text"
-            id="pickup"
-            autoComplete="off"
-            className="input bg-neutral-100 focus:bg-white"
-            placeholder="Enter pickup location"
-            required
-            value={pickup}
-            onChange={(e) => setPickup(e.target.value)}
-            onFocus={() => setActiveInput("pickup")}
-          />
+        {false && (
+          <>
+            <form className="mt-4 w-full space-y-6" onSubmit={handleSubmit}>
+              <h2 className="text-center text-3xl font-semibold">
+                Find a trip 🗾
+              </h2>
+              <input
+                type="text"
+                id="pickup"
+                autoComplete="off"
+                className="input bg-neutral-100 focus:bg-white"
+                placeholder="Enter pickup location"
+                required
+                value={pickup}
+                onChange={(e) => setPickup(e.target.value)}
+                onFocus={() => setActiveInput("pickup")}
+              />
 
-          <input
-            type="text"
-            id="destination"
-            autoComplete="off"
-            className="input bg-neutral-100 focus:bg-white"
-            placeholder="Enter destination"
-            required
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            onFocus={() => setActiveInput("destination")}
-          />
+              <input
+                type="text"
+                id="destination"
+                autoComplete="off"
+                className="input bg-neutral-100 focus:bg-white"
+                placeholder="Enter destination"
+                required
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+                onFocus={() => setActiveInput("destination")}
+              />
 
-          {error && <p className="text-red-500">{error}</p>}
-        </form>
+              {error && <p className="text-red-500">{error}</p>}
+            </form>
 
-        {/* Suggestions */}
-        {isSuggestionVisible && (
-          <ul className="mt-6 w-full">
-            {locationSuggestions.map((location) => (
-              <li
-                key={location.id}
-                className="w-full cursor-pointer p-3 font-medium hover:bg-gray-100"
-                onClick={() => handleSuggestionClick(location.name)}
-              >
-                {location.name}
-              </li>
-            ))}
-          </ul>
+            {/* Suggestions */}
+            {isSuggestionVisible && (
+              <ul className="mt-6 w-full">
+                {locationSuggestions.map((location) => (
+                  <li
+                    key={location.id}
+                    className="w-full cursor-pointer p-3 font-medium hover:bg-gray-100"
+                    onClick={() => handleSuggestionClick(location.name)}
+                  >
+                    {location.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Ride Options */}
+            {pickup.trim() && destination.trim() && !isSuggestionVisible && (
+              <div className="mt-6 w-full">
+                <h3 className="mb-4 text-2xl font-semibold">Select a ride</h3>
+                <div className="space-y-4">
+                  {rideOptions.map((ride) => (
+                    <div
+                      key={ride.id}
+                      className="flex cursor-pointer items-center gap-4 rounded-md border-b border-neutral-200 p-4 transition duration-200 ease-in-out hover:bg-neutral-200"
+                    >
+                      <img
+                        src={ride.image}
+                        alt={ride.name}
+                        className="h-16 w-16 rounded-lg object-contain"
+                      />
+                      <div>
+                        <h2 className="text-xl font-semibold">
+                          {ride.name}
+                          <span className="ml-4 text-lg">{ride.capacity}</span>
+                        </h2>
+                        <p className="text-sm text-gray-500">
+                          {ride.distanceAway} away
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          {ride.description}
+                        </p>
+                      </div>
+                      <div className="ml-auto text-right">
+                        <h3 className="text-xl font-semibold">
+                          Rs. {ride.totalFare}
+                        </h3>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
         )}
 
-        {/* Ride Options */}
-        {pickup.trim() && destination.trim() && !isSuggestionVisible && (
-          <div className="mt-6 w-full">
-            <h3 className="mb-4 text-2xl font-semibold">Select a ride</h3>
-            <div className="space-y-4">
-              {rideOptions.map((ride) => (
-                <div
-                  key={ride.id}
-                  className="flex cursor-pointer items-center gap-4 rounded-md border-b border-neutral-200 p-4 transition duration-200 ease-in-out hover:bg-neutral-200"
-                >
-                  <img
-                    src={ride.image}
-                    alt={ride.name}
-                    className="h-16 w-16 rounded-lg object-contain"
-                  />
-                  <div>
-                    <h2 className="text-xl font-semibold">
-                      {ride.name}
-                      <span className="ml-4 text-lg">{ride.capacity}</span>
-                    </h2>
-                    <p className="text-sm text-gray-500">
-                      {ride.distanceAway} away
-                    </p>
-                    <p className="text-sm text-gray-500">{ride.description}</p>
-                  </div>
-                  <div className="ml-auto text-right">
-                    <h3 className="text-xl font-semibold">
-                      Rs. {ride.totalFare}
-                    </h3>
-                  </div>
+        {true && (
+          <>
+            <h2 className="text-2xl font-semibold">
+              Looking for nearby drivers
+            </h2>
+
+            <img
+              src="https://img.freepik.com/free-vector/isometric-car-icon-isolated-white_107791-128.jpg"
+              className="h-32 w-32 animate-pulse object-contain"
+              alt="Car"
+            />
+
+            <div className="flex w-full flex-col gap-4 border-t border-neutral-200">
+              <div className="flex items-center gap-4 border-b border-neutral-200 py-4">
+                <span>📌</span>
+                <div>
+                  <h2 className="text-2xl font-semibold">524/11-A</h2>
+                  <p className="text-gray-500">Pickup Location</p>
                 </div>
-              ))}
+              </div>
+              <div className="flex items-center gap-4 border-b border-neutral-200 py-4">
+                <span>📌</span>
+                <div>
+                  <h2 className="text-2xl font-semibold">524/11-B</h2>
+                  <p className="text-gray-500">Dropoff Location</p>
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </main>
