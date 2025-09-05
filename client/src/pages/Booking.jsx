@@ -131,9 +131,8 @@ function Booking() {
       <div
         className={`absolute bottom-0 left-1/2 flex w-full max-w-full -translate-x-1/2 flex-col items-center gap-3 bg-white p-6 md:rounded-t-2xl ${isSuggestionVisible ? "h-full w-screen" : "md:w-2xl"} ${!isSuggestionVisible && "max-h-[25rem]"} overflow-y-auto`}
       >
-        <h2 className="text-3xl font-semibold">Find a trip 🗾</h2>
-
         <form className="mt-4 w-full space-y-6" onSubmit={handleSubmit}>
+          <h2 className="text-center text-3xl font-semibold">Find a trip 🗾</h2>
           <input
             type="text"
             id="pickup"
