@@ -15,3 +15,7 @@
 .input-group {
   @apply flex w-full gap-4;
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}

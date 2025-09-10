@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Landing from "./Landing";
 import Booking from "./Booking";
+import Captain from "./Captain";
 
 function Home() {
   const { isAuthenticated, user, role, loading } = useContext(AuthContext);
@@ -18,11 +19,12 @@ function Home() {
     return <Landing />;
   }
 
-  return (
-    <>
-      <Booking />
-    </>
-  );
-}
+  if (role === "user") {
+    return <Booking />;
+  }
 
+  if (role === "captain") {
+    return <Captain />;
+  }
+}
 export default Home;
