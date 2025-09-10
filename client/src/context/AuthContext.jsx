@@ -5,10 +5,14 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [captain, setCaptain] = useState(null);
   const [role, setRole] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  console.log("User:", user);
+  console.log("Captain:", captain);
 
   const registerUser = async (userData) => {
     setLoading(true);
@@ -34,7 +38,7 @@ const AuthProvider = ({ children }) => {
     setError(null);
     try {
       const response = await API.post("/captains/register", captainData);
-      setUser(response.data.user);
+      setCaptain(response.data.captain);
       setRole("captain");
       setIsAuthenticated(true);
     } catch (err) {
@@ -72,7 +76,7 @@ const AuthProvider = ({ children }) => {
     setError(null);
     try {
       const response = await API.post("/captains/login", captainData);
-      setUser(response.data.user);
+      setCaptain(response.data.captain);
       setRole("captain");
       setIsAuthenticated(true);
     } catch (err) {
@@ -106,7 +110,7 @@ const AuthProvider = ({ children }) => {
     setError(null);
     try {
       const response = await API.get("/captains/profile");
-      setUser(response.data.user);
+      setCaptain(response.data.captain);
       setRole("captain");
       setIsAuthenticated(true);
     } catch (err) {
@@ -136,7 +140,7 @@ const AuthProvider = ({ children }) => {
     setError(null);
     try {
       await API.post("/captains/logout");
-      setUser(null);
+      setCaptain(null);
       setRole(null);
       setIsAuthenticated(false);
     } catch (err) {
@@ -149,25 +153,28 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       setLoading(true);
-      setError(null);
+
+      // First try to fetch user profile
       try {
-        const userResponse = await API.get("/users/profile");
-        setUser(userResponse.data.user);
-        setRole("user");
-        setIsAuthenticated(true);
-      } catch (err) {
-        try {
-          const captainResponse = await API.get("/captains/profile");
-          setUser(captainResponse.data.user);
-          setRole("captain");
-          setIsAuthenticated(true);
-        } catch (error) {
-          setError("Unable to fetch profile.");
-        }
+        await getUserProfile();
+      } catch (error) {
+        console.log("No user profile found, trying captain profile...");
       } finally {
         setLoading(false);
       }
+
+      // If no user profile, try to fetch captain profile
+      if (!user) {
+        try {
+          await getCaptainProfile();
+        } catch (error) {
+          console.log("No captain profile found.");
+        } finally {
+          setLoading(false);
+        }
+      }
     };
+
     fetchProfile();
   }, []);
 
